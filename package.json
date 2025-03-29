@@ -9,19 +9,37 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nlpjs/core": "^5.0.0-alpha.5",
+    "@nlpjs/lang-en": "^5.0.0-alpha.5",
+    "@nlpjs/nlp": "^5.0.0-alpha.5",
+    "@notionhq/client": "^2.3.0",
+    "@radix-ui/react-slot": "^1.1.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "firebase": "^11.5.0",
+    "firebase-admin": "^13.2.0",
+    "framer-motion": "^12.6.2",
+    "lucide-react": "^0.485.0",
+    "next": "15.2.4",
+    "next-auth": "^5.0.0-beta.25",
+    "node-nlp": "^5.0.0-alpha.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.2.4"
+    "react-spotify-embed": "^2.0.4",
+    "spotify-embed": "^1.6.6",
+    "spotify-web-api-node": "^5.0.2",
+    "tailwind-merge": "^3.0.2"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
+    "@shadcn/ui": "^0.0.4",
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
-    "@eslint/eslintrc": "^3"
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }

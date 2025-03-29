@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+build4good-hackathon-firebase-adminsdk-fbsvc-e1b1264e3f.json
+
+/.secrets

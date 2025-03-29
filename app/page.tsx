@@ -1,103 +1,152 @@
+"use client";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { signIn } from "next-auth/react";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+	const { data: session } = useSession();
+	const router = useRouter();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+	useEffect(() => {
+		if (session) {
+			router.push("/dashboard"); // Redirect to dashboard if logged in
+		}
+	}, [session, router]);
+
+	return (
+		<div className="relative flex flex-col min-h-screen bg-[#0D0D2B] text-white overflow-hidden">
+			{/* Background Circles */}
+			<div className="absolute top-[-50px] left-[-100px] w-[300px] h-[300px] bg-blue-500 opacity-30 rounded-full blur-3xl"></div>
+			<div className="absolute bottom-[-100px] right-[-50px] w-[250px] h-[250px] bg-purple-500 opacity-30 rounded-full blur-3xl"></div>
+			<div className="absolute top-[30%] left-[50%] w-[200px] h-[200px] bg-indigo-500 opacity-20 rounded-full blur-2xl"></div>
+
+			{/* Navbar */}
+			<nav className="flex justify-between items-center w-full px-10 py-6 bg-[#0A0A23] relative z-10">
+				<div className="flex items-center gap-2">
+					<Image
+						src="/EchoMind_Logo.png"
+						className="rounded-lg"
+						alt="Logo"
+						width={40}
+						height={40}
+					/>
+					<span className="text-2xl pl-2 font-bold">EchoMind</span>
+				</div>
+				<div className="hidden md:flex gap-6 text-gray-300">
+					<a href="#" className="hover:text-white">
+						Home
+					</a>
+					<a href="#" className="hover:text-white">
+						About
+					</a>
+					<a href="#" className="hover:text-white">
+						Features
+					</a>
+					<a href="#" className="hover:text-white">
+						Contact
+					</a>
+				</div>
+				<div className="flex gap-4">
+					<button
+						onClick={() => signIn("spotify")}
+						className="bg-[#1db954] hover:bg-[#1ed760] text-white font-semibold px-6 py-2 rounded-full"
+					>
+						Log in with Spotify
+					</button>
+					{/* <button
+						onClick={() => signIn("google")}
+						className="bg-blue-600 px-6 py-3 rounded-lg shadow-md text-white font-semibold hover:bg-blue-700 transition"
+					>
+						Log in with Google
+					</button>  */}
+				</div>
+			</nav>
+
+			{/* Hero Section */}
+			<section className="mb-auto relative flex flex-col items-center justify-center text-center px-6 py-20 z-10">
+				<div className="max-w-3xl mx-auto text-center space-y-8">
+					<div className="space-y-4">
+						<motion.h2
+							initial={{ opacity: 0, y: -20 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.8 }}
+							className="text-5xl md:text-7xl font-bold tracking-tight"
+						>
+							Turn your thoughts into{" "}
+							<span className="text-[#1db954]">music</span>
+						</motion.h2>
+						<motion.p
+							initial={{ opacity: 0, y: 10 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.8, delay: 0.3 }}
+							className="text-xl md:text-2xl text-gray-300 leading-relaxed"
+						>
+							Music can change or reinforce moods. Let us help
+							with yours.
+						</motion.p>
+					</div>
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8, delay: 0.6 }}
+						className="bg-[#0c0c3d]/50 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-indigo-900/50"
+					>
+						<p className="text-lg md:text-xl leading-relaxed mb-6">
+							EchoMind helps you transform your Notion diary into
+							personalized Spotify playlists. Connect, analyze,
+							and enjoy music that matches your emotions.
+						</p>
+						<button
+							onClick={() => signIn("spotify")}
+							className="bg-[#1db954] hover:bg-[#1ed760] text-white font-semibold px-8 py-4 rounded-full text-lg"
+						>
+							Get Started
+						</button>
+					</motion.div>
+				</div>
+				<motion.div
+					initial={{ opacity: 0, y: 30 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.8, delay: 0.9 }}
+					className="grid md:grid-cols-3 gap-6 mt-12"
+				>
+					<div className="bg-[#0c0c3d]/30 p-6 rounded-xl border border-indigo-900/30">
+						<div className="w-12 h-12 bg-[#1db954]/20 rounded-full flex items-center justify-center">
+							<span className="text-2xl">1</span>
+						</div>
+						<h3 className="text-xl font-semibold mb-2">Connect</h3>
+						<p className="text-gray-300">
+							Link your Spotify and Notion accounts securely
+						</p>
+					</div>
+					<div className="bg-[#0c0c3d]/30 p-6 rounded-xl border border-indigo-900/30">
+						<div className="w-12 h-12 bg-[#1db954]/20 rounded-full flex items-center justify-center ">
+							<span className="text-2xl">2</span>
+						</div>
+						<h3 className="text-xl font-semibold mb-2">Write</h3>
+						<p className="text-gray-300">
+							Express your thoughts and feelings in your Notion
+							diary
+						</p>
+					</div>
+					<div className="bg-[#0c0c3d]/30 p-6 rounded-xl border border-indigo-900/30">
+						<div className="w-12 h-12 bg-[#1db954]/20 rounded-full flex items-center justify-center ">
+							<span className="text-2xl">3</span>
+						</div>
+						<h3 className="text-xl font-semibold mb-2">Listen</h3>
+						<p className="text-gray-300">
+							Enjoy personalized playlists that match your mood using our custom language analyzer, no GPT wrapper!
+						</p>
+					</div>
+				</motion.div>
+				<div className="pt-4">
+					<p>We ensure privacy of your data and thoughts. No text entries are stored on our servers. </p>
+				</div>
+			</section>
+			<footer className="text-white/50 items-center text-center bottom-0 p-8 font-light">Amin Karic - Copyright 2025 <br></br>aminkaric@tamu.edu</footer>
+		</div>
+	);
 }
